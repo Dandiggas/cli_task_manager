@@ -20,3 +20,18 @@ fn test_help_message() {
     assert!(stdout.contains("complete"));
     assert!(stdout.contains("remove"));
 }
+
+#[test]
+fn test_add_task(){
+    let output = Command::new("cargo")
+        .arg("run")
+        .arg("--")
+        .arg("add")
+        .arg("Buy peacock feathers")
+        .output()
+        .expect("Failed to execute command");
+
+    let stdout = String::from_utf8(output.stdout).unwrap();
+    assert!(stdout.contains("Task added: Buy peacock feathers"));
+}
+
